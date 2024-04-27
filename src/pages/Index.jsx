@@ -19,7 +19,11 @@ const Index = () => {
   };
 
   const fetchProduct = async (articleNumber) => {
-    const url = `https://www.lindab.no/article/${articleNumber}`;
+    const corsProxyUrl = "https://corsproxy.io/?";
+    const targetUrl = `${corsProxyUrl}${encodeURIComponent(`https://www.lindab.no/article/${articleNumber}`)}`;
+    const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+    await delay(1000);
+    const url = targetUrl;
     try {
       const response = await fetch(url);
       if (response.ok) {
